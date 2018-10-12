@@ -1,0 +1,274 @@
+#+TITLE: レポート
+#+SUBTITLE: 
+#+AUTHOR: 情報科学類３年 江畑 拓哉 (201611350)
+# This is a Bibtex reference
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:t arch:headline ^:nil
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:nil e:nil email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:nil title:t toc:nil todo:t |:t
+#+DATE: 
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.5.1 (Org mode 9.1.4)
+#+LATEX_CLASS: koma-article
+#+LATEX_CLASS_OPTIONS: 
+#+LATEX_HEADER_EXTRA: \DeclareMathOperator*{\argmax}{argmax}
+#+LATEX_HEADER_EXTRA: \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+#+LaTeX_CLASS_OPTIONS:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+STARTUP: indent overview inlineimages
+
+
+
+* 課題１−１
+　下記コマンドを実行して表示されるデータの、行ラベルと列ラベルを書き出し、その意味を示しなさい。データが多いので、適当に省略して説明すること。
+#+begin_src R :session h :results none
+library(MASS)
+iris
+#+end_src
+
+
+** Result Example
+行はデータの番号であり、列は順番にガク片の長さ、ガク片の幅、花びらの長さ、花びらの幅、品種である。
+#+begin_example
+    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1            5.1         3.5          1.4         0.2     setosa
+2            4.9         3.0          1.4         0.2     setosa
+3            4.7         3.2          1.3         0.2     setosa
+
+148          6.5         3.0          5.2         2.0  virginica
+149          6.2         3.4          5.4         2.3  virginica
+150          5.9         3.0          5.1         1.8  virginica
+#+end_example
+
+* 課題１−２
+　irisデータの各列のタイプとその意味を調べなさい。
+#+begin_src R :session h :results output
+str(iris)
+#+end_src
+
+#+RESULTS:
+: 'data.frame':	150 obs. of  5 variables:
+:  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+:  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+:  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+:  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+:  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+
+|--------------+--------+--------------+----------|
+| 名前         | 型     | 意味         | 型の意味 |
+|--------------+--------+--------------+----------|
+| Sepal.Length | num    | ガク片の長さ | 数値     |
+| Sepal.Width  | num    | ガク片の幅   | 数値     |
+| Petal.Length | num    | 花びらの長さ | 数値     |
+| Petal.Width  | num    | 花びらの幅   | 数値     |
+| Species      | Factor | 品種         | 因子     |
+|--------------+--------+--------------+----------|
+
+* 課題１−３
+　以下を実行し、このコマンドの動作を説明しなさい。
+#+begin_src R :session h :results output
+c("a", "b", "c") [unclass (iris$Species)]
+#+end_src
+
+#+RESULTS:
+:   [1] "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a"
+:  [19] "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a"
+:  [37] "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "a" "b" "b" "b" "b"
+:  [55] "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b"
+:  [73] "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "b"
+:  [91] "b" "b" "b" "b" "b" "b" "b" "b" "b" "b" "c" "c" "c" "c" "c" "c" "c" "c"
+: [109] "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c"
+: [127] "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c"
+: [145] "c" "c" "c" "c" "c" "c"
+
+　品種を表している文字列を順番に ``a'', ``b'', ``c'' と変換している。
+* 課題１−４
+　下記コマンドを実行した結果を提出するとともに、上記コマンドで用いたオプション、pch=21 と bg の意味を調べなさい。
+#+begin_src R :file 1-4.png :session h :results none
+pairs(iris[1:4], pch=21, bg=c("red", "green3", "blue")[unclass(iris$Species)])
+#+end_src
+
+#+ATTR_LATEX: :width 10cm
+[[file:1-4.png]]
+
+|--------+----------------------------------------------------|
+| 名前   | 意味                                               |
+|--------+----------------------------------------------------|
+| pch=21 | サンプルの点を何で表すかであり、今回は丸である。   |
+| bg     | 塗りつぶしを示しており、あやめの種類に対して順番に |
+|        | ``red'', ``green3'', ``blue'' で塗りつぶしている。 |
+|--------+----------------------------------------------------|
+* 課題１−５
+　data() コマンドで iris 以外のデータを一つ探し、レポート課題 R1-4 のような散布図を作
+成し、利用したデータや属性について説明しなさい。
+#+begin_src R :session h :results output
+data ()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Data sets in package ‘datasets’:
+
+AirPassengers           Monthly Airline Passenger Numbers 1949-1960
+BJsales                 Sales Data with Leading Indicator
+BJsales.lead (BJsales)
+                        Sales Data with Leading Indicator
+BOD                     Biochemical Oxygen Demand
+CO2                     Carbon Dioxide Uptake in Grass Plants
+ChickWeight             Weight versus age of chicks on different diets
+DNase                   Elisa assay of DNase
+EuStockMarkets          Daily Closing Prices of Major European Stock
+                        Indices, 1991-1998
+Formaldehyde            Determination of Formaldehyde
+HairEyeColor            Hair and Eye Color of Statistics Students
+Harman23.cor            Harman Example 2.3
+Harman74.cor            Harman Example 7.4
+Indometh                Pharmacokinetics of Indomethacin
+InsectSprays            Effectiveness of Insect Sprays
+JohnsonJohnson          Quarterly Earnings per Johnson & Johnson Share
+LakeHuron               Level of Lake Huron 1875-1972
+LifeCycleSavings        Intercountry Life-Cycle Savings Data
+Loblolly                Growth of Loblolly pine trees
+Nile                    Flow of the River Nile
+Orange                  Growth of Orange Trees
+OrchardSprays           Potency of Orchard Sprays
+PlantGrowth             Results from an Experiment on Plant Growth
+Puromycin               Reaction Velocity of an Enzymatic Reaction
+Seatbelts               Road Casualties in Great Britain 1969-84
+Theoph                  Pharmacokinetics of Theophylline
+Titanic                 Survival of passengers on the Titanic
+ToothGrowth             The Effect of Vitamin C on Tooth Growth in
+                        Guinea Pigs
+UCBAdmissions           Student Admissions at UC Berkeley
+UKDriverDeaths          Road Casualties in Great Britain 1969-84
+UKgas                   UK Quarterly Gas Consumption
+USAccDeaths             Accidental Deaths in the US 1973-1978
+USArrests               Violent Crime Rates by US State
+USJudgeRatings          Lawyers' Ratings of State Judges in the US
+                        Superior Court
+USPersonalExpenditure   Personal Expenditure Data
+UScitiesD               Distances Between European Cities and Between
+                        US Cities
+VADeaths                Death Rates in Virginia (1940)
+WWWusage                Internet Usage per Minute
+WorldPhones             The World's Telephones
+ability.cov             Ability and Intelligence Tests
+airmiles                Passenger Miles on Commercial US Airlines,
+                        1937-1960
+airquality              New York Air Quality Measurements
+anscombe                Anscombe's Quartet of 'Identical' Simple Linear
+                        Regressions
+attenu                  The Joyner-Boore Attenuation Data
+attitude                The Chatterjee-Price Attitude Data
+austres                 Quarterly Time Series of the Number of
+                        Australian Residents
+beaver1 (beavers)       Body Temperature Series of Two Beavers
+beaver2 (beavers)       Body Temperature Series of Two Beavers
+cars                    Speed and Stopping Distances of Cars
+chickwts                Chicken Weights by Feed Type
+co2                     Mauna Loa Atmospheric CO2 Concentration
+crimtab                 Student's 3000 Criminals Data
+discoveries             Yearly Numbers of Important Discoveries
+esoph                   Smoking, Alcohol and (O)esophageal Cancer
+euro                    Conversion Rates of Euro Currencies
+euro.cross (euro)       Conversion Rates of Euro Currencies
+eurodist                Distances Between European Cities and Between
+                        US Cities
+faithful                Old Faithful Geyser Data
+fdeaths (UKLungDeaths)
+                        Monthly Deaths from Lung Diseases in the UK
+freeny                  Freeny's Revenue Data
+freeny.x (freeny)       Freeny's Revenue Data
+freeny.y (freeny)       Freeny's Revenue Data
+infert                  Infertility after Spontaneous and Induced
+                        Abortion
+iris                    Edgar Anderson's Iris Data
+iris3                   Edgar Anderson's Iris Data
+islands                 Areas of the World's Major Landmasses
+ldeaths (UKLungDeaths)
+                        Monthly Deaths from Lung Diseases in the UK
+lh                      Luteinizing Hormone in Blood Samples
+longley                 Longley's Economic Regression Data
+lynx                    Annual Canadian Lynx trappings 1821-1934
+mdeaths (UKLungDeaths)
+                        Monthly Deaths from Lung Diseases in the UK
+morley                  Michelson Speed of Light Data
+mtcars                  Motor Trend Car Road Tests
+nhtemp                  Average Yearly Temperatures in New Haven
+nottem                  Average Monthly Temperatures at Nottingham,
+                        1920-1939
+npk                     Classical N, P, K Factorial Experiment
+occupationalStatus      Occupational Status of Fathers and their Sons
+precip                  Annual Precipitation in US Cities
+presidents              Quarterly Approval Ratings of US Presidents
+pressure                Vapor Pressure of Mercury as a Function of
+                        Temperature
+quakes                  Locations of Earthquakes off Fiji
+randu                   Random Numbers from Congruential Generator
+                        RANDU
+rivers                  Lengths of Major North American Rivers
+rock                    Measurements on Petroleum Rock Samples
+sleep                   Student's Sleep Data
+stack.loss (stackloss)
+                        Brownlee's Stack Loss Plant Data
+stack.x (stackloss)     Brownlee's Stack Loss Plant Data
+stackloss               Brownlee's Stack Loss Plant Data
+state.abb (state)       US State Facts and Figures
+state.area (state)      US State Facts and Figures
+state.center (state)    US State Facts and Figures
+state.division (state)
+                        US State Facts and Figures
+state.name (state)      US State Facts and Figures
+state.region (state)    US State Facts and Figures
+state.x77 (state)       US State Facts and Figures
+sunspot.month           Monthly Sunspot Data, from 1749 to "Present"
+sunspot.year            Yearly Sunspot Data, 1700-1988
+sunspots                Monthly Sunspot Numbers, 1749-1983
+swiss                   Swiss Fertility and Socioeconomic Indicators
+                        (1888) Data
+treering                Yearly Treering Data, -6000-1979
+trees                   Girth, Height and Volume for Black Cherry Trees
+uspop                   Populations Recorded by the US Census
+volcano                 Topographic Information on Auckland's Maunga
+                        Whau Volcano
+warpbreaks              The Number of Breaks in Yarn during Weaving
+women                   Average Heights and Weights for American Women
+
+
+Use ‘data(package = .packages(all.available = TRUE))’
+to list the data sets in all *available* packages.
+#+end_example
+
+　オレンジの木の年齢と太さ、種類について調べた。
+#+begin_src R :session h :results output
+head (Orange) 
+#+end_src
+
+#+RESULTS:
+:   Tree  age circumference
+: 1    1  118            30
+: 2    1  484            58
+: 3    1  664            87
+: 4    1 1004           115
+: 5    1 1231           120
+: 6    1 1372           142
+
+|---------------+-----+----------|
+| 名前          | 型  | 意味     |
+|---------------+-----+----------|
+| Tree          | num | 木のID   |
+| age           | num | 木の年齢 |
+| circumference | num | 木の太さ |
+|---------------+-----+----------|
+
+#+begin_src R :session h :results none :file result2.png
+pairs(Orange[2:3], pch=21, 
+bg=c("red", "green3", "blue", 'black', 'yellow')[unclass(Orange$Tree)])
+#+end_src
+
+#+ATTR_LATEX: :width 10cm
+[[file:result2.png]]
