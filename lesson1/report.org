@@ -1,4 +1,4 @@
-#+TITLE: レポート
+#+TITLE: パターン認識レポート
 #+SUBTITLE: 
 #+AUTHOR: 情報科学類３年 江畑 拓哉 (201611350)
 # This is a Bibtex reference
