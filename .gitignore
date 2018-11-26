@@ -6,3 +6,5 @@
 *.out
 *.xml
 *.aux
+lesson2/data/*
+.Rproj.user
