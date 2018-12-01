@@ -1,0 +1,21 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}４つの学習データを２次元平面 \((x_1, x_2)\) 上にクラスラベルを明示してプロットしなさい}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}マージンが細大になる線形識別関数 \(f(x_1, x_2)\) を視覚的に求め、識別境界を図中に示しなさい}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}マージンの値はいくつになるか。}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}4 つの学習データのうち、サポートベクトルはどれか}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}サポートベクトルが KKT 条件 \(t_i(\bm {w}^Tx_i + b) \geq 1\) を満たしているか確認しなさい。}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}サポートベクトルのみを用いて双対問題のラグランジュ関数を求めなさい}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}ラグランジュ関数をラグランジュ乗数で微分し、0 とおいて、すべてのラグランジュ乗数の値を求めなさい}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8}得られたラグランジュ乗数を用いて最適解 \(\bm {w_0}\) を求めなさい}{6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {9}最適なバイアス \(b_0\) を求めなさい}{6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {10}得られた識別関数は、 (5) で求めた識別関数と一致したか}{6}

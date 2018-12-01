@@ -1,0 +1,180 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:t arch:headline ^:nil
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:nil e:nil email:t f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:nil title:t toc:nil todo:t |:t
+#+TITLE: 第８章レポート課題
+#+SUBTITLE: 
+#+DATE: 
+#+AUTHOR: 情報学群情報科学類３年 江畑 拓哉 (201611350)
+#+EMAIL: 
+#+LANGUAGE: ja
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.5.1 (Org mode 9.0.2)
+
+#+LATEX_CLASS: koma-article
+#+LATEX_CLASS_OPTIONS:
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER_EXTRA:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+SUBTITLE:
+#+STARTUP: indent overview inlineimages
+
+
+４つの学習データを
+\begin{eqnarray*}
+\{(t_A = -1, \bm{x_A} = (0,0)^T), (t_B = -1, \bm{x_B} = (1, 0)^T)), (t_C = -1, \bm{x_C} = (0,1)^T), (t_D = +1, \bm{x_D} = (1, 1)^T)\}
+\end{eqnarray*}
+とする。以下の問に答えなさい。
+
+* ４つの学習データを２次元平面 \texorpdfstring{\((x_1, x_2)\)} 上にクラスラベルを明示してプロットしなさい
+
+#+CAPTION: ４つの学習データのプロット
+#+ATTR_LATEX: :width 10cm
+[[./p-recog1-5-1.png]]
+
+* マージンが細大になる線形識別関数 \texorpdfstring{\(f(x_1, x_2)\)} を視覚的に求め、識別境界を図中に示しなさい
+
+識別関数 
+\begin{eqnarray*}
+f(x_1, x_2) &=& \bm{w} (x_1, x_2)^T + b \\
+w &=& (1, 1)\\
+b &=& - \frac{3}{2} 
+\end{eqnarray*}
+
+
+#+CAPTION: ４つの学習データのプロット
+#+ATTR_LATEX: :width 10cm
+[[./p-recog1-5-2.png]]
+* マージンの値はいくつになるか。
+
+\begin{eqnarray*}
+D_{max} = \frac{1}{2} \frac{\sqrt{2}}{2} = \frac{1}{{2 \sqrt{2}}}
+\end{eqnarray*}
+
+* 4 つの学習データのうち、サポートベクトルはどれか
+$t_B, t_C, t_D$
+* サポートベクトルが KKT 条件を満たしているか確認しなさい。
+KKT 条件　$t_i(\bm{w}^T x_i + b) \geq 1$
+満たしていない場合、満たすように識別関数を修正しなさい
+
+それぞれ $t_B, t_C, t_D$ について、
+\begin{eqnarray*}
+-1 ((1, 1)(1, 0)^T + (- \frac{3}{2})) = \frac{1}{2} \\
+-1 ((1, 1)(0, 1)^T + (- \frac{3}{2})) = \frac{1}{2} \\
+1 ((1, 1)(1, 1)^T + (- \frac{3}{2})) = \frac{1}{2}
+\end{eqnarray*}
+　これは KKT 条件を満たしていない。なので、 $\bm{w} = (2, 2)^T, b = -3$ に修正すると、
+\begin{eqnarray*}
+-1 ((2, 2)(1, 0)^T + (- 3)) = 1\\
+-1 ((2, 2)(0, 1)^T + (- 3)) = 1\\
+1 ((2, 2)(1, 1)^T + (- 3)) = 1
+\end{eqnarray*}
+　　これは KKT 条件を満たしているので、識別関数は修正された。
+* サポートベクトルのみを用いて双対問題のラグランジュ関数を求めなさい
+\begin{eqnarray*}\
+\tilde{L_d} (\bm{\alpha}, \beta) &=& \bm{\alpha}^T 1 - \frac{1}{2} \bm{\alpha}^T H \bm{\alpha} - \beta \bm{\alpha}^T \bm{t} \\
+\bm{\alpha} &=& (\alpha_1\ \alpha_2\ \alpha_3)^T \\
+1 &=& (1\ 1\ 1)^T \\
+H &=& (H_{i, j} = t_i t_j \bm{x_i}^T \bm{x_j}) = \left (
+\begin{array}{ccc}
+1&0&-1\\
+0&1&-1\\
+-1&-1&2
+\end{array}
+\right ) \\
+\bm{t} &=& (-1\ -1\ 1)^T
+\end{eqnarray*}
+* ラグランジュ関数をラグランジュ乗数で微分し、0 とおいて、すべてのラグランジュ乗数の値を求めなさい
+\begin{eqnarray*}
+\tilde{L_d} (\bm{\alpha}, \beta) &=& \alpha_1 + \alpha_2 + \alpha_3 -  \frac{1}{2} (\alpha_1^2 - \alpha_1 \alpha_3 + \alpha_2^2 - \alpha_2 \alpha_3 - \alpha_1 \alpha_3 - \alpha_2 \alpha_3 + 2 \alpha_3^2) - \beta (- \alpha_1 - \alpha_2 + \alpha_3)  \\
+&=& (\alpha_1 - \frac{1}{2} \alpha_1^2 + \beta \alpha_1) + (\alpha_2 - \frac{1}{2} \alpha_2^2 + \beta \alpha_2) + (\alpha_3 - \alpha_3^2 - \beta \alpha_3) + (\alpha_1 \alpha_3 + \alpha_2 \alpha_3)
+\end{eqnarray*}
+　微分して
+\begin{eqnarray*}
+\frac{\partial \tilde{L_d}}{\partial \alpha_1} &=& 1 - \alpha_1 + \beta + \alpha_3 = 0\\
+\frac{\partial \tilde{L_d}}{\partial \alpha_2} &=& 1 - \alpha_2 + \beta + \alpha_3 = 0\\
+\frac{\partial \tilde{L_d}}{\partial \alpha_3} &=& 1 - 2\alpha_3 - \beta + \alpha_1 + \alpha_2 = 0\\
+\frac{\partial \tilde{L_d}}{\partial \beta} &=& \alpha_1 + \alpha_2 - \alpha_3 = 0
+\end{eqnarray*}
+　得られた４式を連立させて、
+\begin{eqnarray*}
+\begin{cases}
+ 1 - \alpha_1 + \beta + \alpha_3 = 0\\
+ 1 - \alpha_2 + \beta + \alpha_3 = 0\\
+ 1 - 2\alpha_3 - \beta + \alpha_1 + \alpha_2 = 0\\
+\alpha_1 + \alpha_2 - \alpha_3 = 0
+\end{cases}
+& \Leftrightarrow &
+\begin{cases}
+\alpha_1 = \alpha_2 \\
+ 1 - \alpha_1 + \beta + \alpha_3 = 0\\
+ 1 - 2\alpha_3 - \beta + \alpha_1 + \alpha_2 = 0\\
+\alpha_1 + \alpha_2 - \alpha_3 = 0
+\end{cases} \\
+& \Leftrightarrow &
+\begin{cases}
+\alpha_1 = \alpha_2 \\
+ 1 - \alpha_1 + \beta + \alpha_3 = 0\\
+ 1 - 2\alpha_3 - \beta + 2\alpha_1 = 0\\
+2 \alpha_1 - \alpha_3 = 0
+\end{cases}
+\end{eqnarray*}
+
+\begin{eqnarray*}
+& \Leftrightarrow &
+\begin{cases}
+\alpha_1 = \alpha_2 \\
+2\alpha_1 =  \alpha_3 \\
+ 1 - \alpha_1 + \beta + \alpha_3 = 0\\
+ 1 - 2\alpha_3 - \beta + 2\alpha_1 = 0\\
+\end{cases} \\
+& \Leftrightarrow &
+\begin{cases}
+\alpha_1 = \alpha_2 \\
+2\alpha_1 =  \alpha_3 \\
+ 1 - \alpha_1 + \beta + 2\alpha_1 = 0\\
+ 1 - 4\alpha_1 - \beta + 2\alpha_1 = 0\\
+\end{cases} \\
+& \Leftrightarrow &
+\begin{cases}
+\alpha_1 = \alpha_2 \\
+2\alpha_1 =  \alpha_3 \\
+ 1 + \beta + \alpha_1 = 0\\
+ 1  - \beta - 2\alpha_1 = 0\\
+\end{cases} \\
+& \Leftrightarrow &
+\begin{cases}
+\alpha_1 = \alpha_2 \\
+2\alpha_1 =  \alpha_3 \\
+ 1 + \beta + \alpha_1 = 0\\
+ 2 =  \alpha_1\\
+\end{cases}
+\end{eqnarray*}
+ よって、
+\begin{eqnarray*}
+\alpha_1 = 2
+\alpha_2 = 2
+\alpha_3 = 4
+\beta = -3
+\end{eqnarray*}
+* 得られたラグランジュ乗数を用いて最適解を求めなさい
+最適解 $w_0$
+\begin{eqnarray*}
+\bm{w_0} &=& \Sigma_{i=1}^n \alpha_i t_i \bm{x_i} \\
+&=& (2)(-1)(1\ 0)^T + (2)(-1) (0\ 1)^T + (4)(1)(1\ 1)\\
+&=& (2\ 2)^T
+\end{eqnarray*}
+* 最適なバイアスを求めなさい
+最適なバイアス $b_0$
+\begin{eqnarray*}
+\alpha_1 (t_1 (\bm{w_0}^T \bm{x_1} + b_0) -1) &=& 0  \\
+(2\ 2)(1\ 0)^T + b_0 + 1 &=& 0 \because t_1 = t_B, \bm{x_1} = \bm{x_B}\\
+2 + b_0 +1 &=& 0
+\end{eqnarray*}
+　よって $b_0 = -3$
+* 得られた識別関数は、 (5) で求めた識別関数と一致したか
+一致した。
