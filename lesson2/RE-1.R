@@ -1,5 +1,4 @@
 # R 3.5.1 で実行確認
-# RStudio Version 1.1.463 (R 3.5.1)では実行出来ず
 # import libraries
 library(nnet)
 library(MASS)
