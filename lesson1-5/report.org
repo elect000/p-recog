@@ -156,9 +156,9 @@ H &=& (H_{i, j} = t_i t_j \bm{x_i}^T \bm{x_j}) = \left (
 \end{eqnarray*}
  よって、
 \begin{eqnarray*}
-\alpha_1 = 2
-\alpha_2 = 2
-\alpha_3 = 4
+\alpha_1 = 2 \\
+\alpha_2 = 2 \\
+\alpha_3 = 4 \\
 \beta = -3
 \end{eqnarray*}
 * 得られたラグランジュ乗数を用いて最適解を求めなさい
