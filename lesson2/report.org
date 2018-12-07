@@ -69,7 +69,7 @@ plot(hidden, trave, type="b", lty=1, lwd=2)
 # 3) 1-1-3.png
 hist(res_s[1][[1]]$wts, breaks=seq(-0.1, 0.1, 0.04), freq=TRUE)
 # 4) 1-1-4.png
-hist(res_s[z][[1]]$wts, breaks=seq(-0.1, 0.1, 0.04), freq=TRUE)
+hist(res_s[z * 10][[1]]$wts, breaks=seq(-0.1, 0.1, 0.04), freq=TRUE)
 #+end_src
 ** 隠れ素子を一つずつ増やし、10回の学習で10回とも正しく識別できるようになった隠れ素子の数を求めなさい。　
 37個
