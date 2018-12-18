@@ -231,13 +231,13 @@ hist(res_s[which.min(trave_test)][[1]]$wts, breaks=seq(-6, 6, 1), freq=TRUE)
 #+LATEX: \newpage
 ** 再代入誤りが一番小さな場合の結合係数の分布と、汎化誤差が一番小さな場合の結合係数の分布を、decay=0 の場合と比較しなさい。
 - 再代入誤りが一番小さな場合の結合係数の分布
-  #+CAPTION: 1-2-4-1.png
+  #+CAPTION: 1-2-4-1.png 再代入誤りが一番小さな場合の結合係数の分布
   #+ATTR_LATEX: :width 8cm
-[[./1-2-4-1.png]]
+  [[./1-2-4-1.png]]
 - 汎化誤差が一番小さな場合の結合係数の分布
-#+CAPTION: 1-2-4-2.png
-#+ATTR_LATEX: :width 8cm
-[[./1-2-4-2.png]]
+  #+CAPTION: 1-2-4-2.png 汎化誤差が一番小さな場合の結合係数の分布
+  #+ATTR_LATEX: :width 8cm
+  [[./1-2-4-2.png]]
 - 比較
   　いずれと比較しても、decay = 0.01 の方が分布の幅が縮まっていることが確認できる。また概形としても decay = 0.01 の方がより綺麗な(対称な)山の形を描いていることがわかる。
 #+LATEX: \newpage
@@ -523,11 +523,10 @@ model.CNNtanhDrop <- mx.model.FeedForward.create(lenet, X=train.array,
                                                  y=train.y, ctx=devices, 
                                                  num.round = 30, 
                                                  array.batch.size = 100,
-                                                 learning.rate=0.05,
-                                                 momentum=0.9, 
-                                                 wd=0.000001,
+                                                 learning.rate=0.05, 
+                                                 momentum=0.9, wd=0.00001,
                                                  eval.metric=mx.metric.accuracy,
-                                                 batch.end.callback =
+                                                 batch.end.callback = 
                                                    mx.callback.log.train.metric(100))
 print(proc.time() - tic)
 preds <- predict(model.CNNtanhDrop, test.array, ctx=devices)
@@ -550,35 +549,35 @@ sum(diag(table(test_org[,1], pred.label))) / 1000
 # ---------------------------------------------
 # [1] Train-accuracy=0.0943999997526407
 # [2] Train-accuracy=0.089199999794364
-# [3] Train-accuracy=0.095800000205636
-# [4] Train-accuracy=0.353800000697374
-# [5] Train-accuracy=0.815199997425079
-# [6] Train-accuracy=0.879399998188019
-# [7] Train-accuracy=0.910400002002716
-# [8] Train-accuracy=0.919399999380112
-# [9] Train-accuracy=0.933800001144409
-# [10] Train-accuracy=0.933000004291534
-# [11] Train-accuracy=0.939599999189377
-# [12] Train-accuracy=0.945799996852875
-# [13] Train-accuracy=0.944800004959106
-# [14] Train-accuracy=0.945000002384186
-# [15] Train-accuracy=0.946200004816055
-# [16] Train-accuracy=0.960200003385544
-# [17] Train-accuracy=0.956600003242493
-# [18] Train-accuracy=0.954999998807907
-# [19] Train-accuracy=0.958400005102158
-# [20] Train-accuracy=0.961600004434586
-# [21] Train-accuracy=0.962000002861023
-# [22] Train-accuracy=0.960800007581711
-# [23] Train-accuracy=0.964000006914139
-# [24] Train-accuracy=0.965400005578995
-# [25] Train-accuracy=0.966400007009506
-# [26] Train-accuracy=0.968800005912781
-# [27] Train-accuracy=0.964800003767014
-# [28] Train-accuracy=0.967800005674362
-# [29] Train-accuracy=0.965600006580353
-# [30] Train-accuracy=0.969400007724762
-# [1] 0.986
+# [3] Train-accuracy=0.0956000000983477
+# [4] Train-accuracy=0.353200001269579
+# [5] Train-accuracy=0.814999997615814
+# [6] Train-accuracy=0.879199998378754
+# [7] Train-accuracy=0.91200000166893
+# [8] Train-accuracy=0.918200002908707
+# [9] Train-accuracy=0.933600000143051
+# [10] Train-accuracy=0.934600001573563
+# [11] Train-accuracy=0.940800001621246
+# [12] Train-accuracy=0.947199996709824
+# [13] Train-accuracy=0.945600001811981
+# [14] Train-accuracy=0.943799996376038
+# [15] Train-accuracy=0.945399998426437
+# [16] Train-accuracy=0.958400007486343
+# [17] Train-accuracy=0.956800009012222
+# [18] Train-accuracy=0.957000002861023
+# [19] Train-accuracy=0.958199999332428
+# [20] Train-accuracy=0.958999999761581
+# [21] Train-accuracy=0.965000002384186
+# [22] Train-accuracy=0.966000006198883
+# [23] Train-accuracy=0.966400002241135
+# [24] Train-accuracy=0.964200004339218
+# [25] Train-accuracy=0.966800007820129
+# [26] Train-accuracy=0.964200004339218
+# [27] Train-accuracy=0.962800003290176
+# [28] Train-accuracy=0.970400004386902
+# [29] Train-accuracy=0.969200010299683
+# [30] Train-accuracy=0.97040000796318
+# [1] 0.985
 # ---------------------------------------------
 
 training_mnist_cnn = function(dropout, activate_fn) {
@@ -640,12 +639,10 @@ training_mnist_cnn = function(dropout, activate_fn) {
   
   # training model
   model.CNNtanhDrop <- mx.model.FeedForward.create(lenet, X=train.array,
-                                      y=train.y, ctx=devices, num.round = 30,
-                                      array.batch.size = 100,
-                                      learning.rate=0.05, momentum=0.9, wd=0.000001,
+                                      y=train.y, ctx=devices, num.round = 30, array.batch.size = 100,
+                                      learning.rate=0.05, momentum=0.9, wd=0.00001,
                                       eval.metric=mx.metric.accuracy,
-                                      batch.end.callback = 
-                                        mx.callback.log.train.metric(100))
+                                      batch.end.callback = mx.callback.log.train.metric(100))
   print(proc.time() - tic)
   preds <- predict(model.CNNtanhDrop, test.array, ctx=devices)
   pred.label <- max.col(t(preds)) -1
@@ -658,22 +655,22 @@ training_mnist_cnn(FALSE, "tanh")
 # [1] Train-accuracy=0.0951999997347593
 # [2] Train-accuracy=0.0893999997526407
 # [3] Train-accuracy=0.0931999997794628
-# [4] Train-accuracy=0.353799997121096
-# [5] Train-accuracy=0.841599998474121
-# [6] Train-accuracy=0.91860000371933
+# [4] Train-accuracy=0.351199997663498
+# [5] Train-accuracy=0.840799999237061
+# [6] Train-accuracy=0.919000004529953
 # [7] Train-accuracy=0.951199996471405
-# [8] Train-accuracy=0.96200000166893
-# [9] Train-accuracy=0.970600011348724
-# [10] Train-accuracy=0.980000009536743
-# [11] Train-accuracy=0.984800010919571
-# [12] Train-accuracy=0.991400008201599
+# [8] Train-accuracy=0.962000002861023
+# [9] Train-accuracy=0.970400011539459
+# [10] Train-accuracy=0.979800009727478
+# [11] Train-accuracy=0.984800012111664
+# [12] Train-accuracy=0.991200008392334
 # [13] Train-accuracy=0.992800006866455
-# [14] Train-accuracy=0.994400005340576
+# [14] Train-accuracy=0.994800004959106
 # [15] Train-accuracy=0.996200003623962
-# [16] Train-accuracy=0.995200004577637
-# [17] Train-accuracy=0.996800003051758
-# [18] Train-accuracy=0.998200001716614
-# [19] Train-accuracy=0.999400000572205
+# [16] Train-accuracy=0.995400004386902
+# [17] Train-accuracy=0.997000002861023
+# [18] Train-accuracy=0.997800002098084
+# [19] Train-accuracy=0.999200000762939
 # [20] Train-accuracy=1
 # [21] Train-accuracy=1
 # [22] Train-accuracy=1
@@ -696,72 +693,72 @@ training_mnist_cnn(FALSE, "relu")
 # [1] Train-accuracy=0.0957999996095896
 # [2] Train-accuracy=0.0893999997526407
 # [3] Train-accuracy=0.0903999998420477
-# [4] Train-accuracy=0.112800000011921
-# [5] Train-accuracy=0.434800001382828
-# [6] Train-accuracy=0.876400001049042
-# [7] Train-accuracy=0.945999997854233
-# [8] Train-accuracy=0.963000003099442
-# [9] Train-accuracy=0.964600006341934
-# [10] Train-accuracy=0.971200007200241
-# [11] Train-accuracy=0.978200010061264
-# [12] Train-accuracy=0.987200009822846
-# [13] Train-accuracy=0.989800009727478
-# [14] Train-accuracy=0.991600008010864
-# [15] Train-accuracy=0.992000007629395
-# [16] Train-accuracy=0.996000003814697
-# [17] Train-accuracy=0.997800002098084
-# [18] Train-accuracy=0.999400000572205
-# [19] Train-accuracy=0.999400000572205
-# [20] Train-accuracy=0.998400001525879
-# [21] Train-accuracy=0.999800000190735
-# [22] Train-accuracy=0.999000000953674
-# [23] Train-accuracy=0.999400000572205
-# [24] Train-accuracy=0.999800000190735
-# [25] Train-accuracy=0.999800000190735
-# [26] Train-accuracy=0.999800000190735
+# [4] Train-accuracy=0.110599999576807
+# [5] Train-accuracy=0.418600002527237
+# [6] Train-accuracy=0.869200000762939
+# [7] Train-accuracy=0.947000004053116
+# [8] Train-accuracy=0.965000007152557
+# [9] Train-accuracy=0.973400008678436
+# [10] Train-accuracy=0.975400009155273
+# [11] Train-accuracy=0.980800009965897
+# [12] Train-accuracy=0.986800010204315
+# [13] Train-accuracy=0.99100000500679
+# [14] Train-accuracy=0.991400008201599
+# [15] Train-accuracy=0.994200005531311
+# [16] Train-accuracy=0.99300000667572
+# [17] Train-accuracy=0.991000006198883
+# [18] Train-accuracy=0.995400004386902
+# [19] Train-accuracy=0.996800003051758
+# [20] Train-accuracy=0.995800004005432
+# [21] Train-accuracy=0.998200001716614
+# [22] Train-accuracy=0.999800000190735
+# [23] Train-accuracy=1
+# [24] Train-accuracy=1
+# [25] Train-accuracy=1
+# [26] Train-accuracy=1
 # [27] Train-accuracy=1
 # [28] Train-accuracy=1
 # [29] Train-accuracy=1
 # [30] Train-accuracy=1
 # user  system elapsed 
 # 513.99  243.98  154.81 
-# [1] 0.982
+# [1] 0.979
 # --------------------------------------------------------------------
 # 5)
 training_mnist_cnn(TRUE, "relu")
 # [1] Train-accuracy=0.0949999997764826
 # [2] Train-accuracy=0.0893999997526407
 # [3] Train-accuracy=0.0899999997764826
-# [4] Train-accuracy=0.100199999809265
-# [5] Train-accuracy=0.359799997210503
-# [6] Train-accuracy=0.774200001955032
-# [7] Train-accuracy=0.879999998807907
-# [8] Train-accuracy=0.90300000667572
-# [9] Train-accuracy=0.920800005197525
-# [10] Train-accuracy=0.927600004673004
-# [11] Train-accuracy=0.94440000295639
-# [12] Train-accuracy=0.945800001621246
-# [13] Train-accuracy=0.945199998617172
-# [14] Train-accuracy=0.949000002145767
-# [15] Train-accuracy=0.953400001525879
-# [16] Train-accuracy=0.960600000619888
-# [17] Train-accuracy=0.955800002813339
-# [18] Train-accuracy=0.963600004911423
-# [19] Train-accuracy=0.960200004577637
-# [20] Train-accuracy=0.964400005340576
-# [21] Train-accuracy=0.966000009775162
-# [22] Train-accuracy=0.967400008440018
-# [23] Train-accuracy=0.964800004959106
-# [24] Train-accuracy=0.968200006484985
-# [25] Train-accuracy=0.969400004148483
-# [26] Train-accuracy=0.970800008773804
-# [27] Train-accuracy=0.971400009393692
-# [28] Train-accuracy=0.966400008201599
-# [29] Train-accuracy=0.968200007677078
-# [30] Train-accuracy=0.972400006055832
+# [4] Train-accuracy=0.100200000032783
+# [5] Train-accuracy=0.35619999974966
+# [6] Train-accuracy=0.773400000333786
+# [7] Train-accuracy=0.879000000953674
+# [8] Train-accuracy=0.908400002717972
+# [9] Train-accuracy=0.922000004053116
+# [10] Train-accuracy=0.927400002479553
+# [11] Train-accuracy=0.938999998569489
+# [12] Train-accuracy=0.948400005102158
+# [13] Train-accuracy=0.951800004243851
+# [14] Train-accuracy=0.953199998140335
+# [15] Train-accuracy=0.955200002193451
+# [16] Train-accuracy=0.959800000190735
+# [17] Train-accuracy=0.95600000500679
+# [18] Train-accuracy=0.956400002241135
+# [19] Train-accuracy=0.959000000953674
+# [20] Train-accuracy=0.961200001239777
+# [21] Train-accuracy=0.966800006628036
+# [22] Train-accuracy=0.968200008869171
+# [23] Train-accuracy=0.969600011110306
+# [24] Train-accuracy=0.968600010871887
+# [25] Train-accuracy=0.970800009965897
+# [26] Train-accuracy=0.970800012350082
+# [27] Train-accuracy=0.968200005292892
+# [28] Train-accuracy=0.971000007390976
+# [29] Train-accuracy=0.969400010108948
+# [30] Train-accuracy=0.973800009489059
 # user  system elapsed 
 # 543.69  238.85  157.29 
-# [1] 0.98
+# [1] 0.986
 # ---------------------------------------------------------
 #+end_src
 ** 第1隠れ層の conv1 の出力素子数は $M_1 \times M_1 \times N_1$ である。また、pool1 の出力素子数は $M_2 \times M_2 \times N_2$ である。 $M_1, N_1$ と $M_2, N_2$ はいくつか。
@@ -775,14 +772,14 @@ training_mnist_cnn(TRUE, "relu")
 - $M_2$ 4
 - $N_2$ 50
 ** 第1結合層への入力を作っている mx.symbol.Flatten() 関数の役割は何か。
-　(バッチを考慮するならば)３次元配列を、バッチを表す次元を除いた２つの次元をまとめることで、２次元配列に変換している。
+　(バッチを考慮するならば)4次元配列を、バッチを表す次元を除いた3つの次元(x, y, filter)をまとめることで、２次元配列に変換している。
 　一般に深層学習を行う際にはバッチという学習データをいくつかの袋に入れた単位で学習が行われるため、例えば Tensorflow などで実装を行う際にはこの ``一次元増える'' 現象について理解しておく必要がある。
 * レポート課題 3.2
 　学習データとテストデータに対する正答率はいくつになったか。
-|--------------+-------------------|
-| 学習データ   | 0.969400007724762 |
-| テストデータ |             0.986 |
-|--------------+-------------------|
+|--------------+------------------|
+| 学習データ   | 0.97040000796318 |
+| テストデータ |            0.985 |
+|--------------+------------------|
 
 * レポート課題 3.3
 　dropout 正則化を外した場合、学習データとテストデータに対する正答率はいくつになったか。
@@ -795,24 +792,27 @@ training_mnist_cnn(TRUE, "relu")
 　dropout 正則化を外した状態で、出力関数を tanh から ReLU に変えた場合、学習データとテストデータに対する正答率はいくつになったか。
 |--------------+-------|
 | 学習データ   |     1 |
-| テストデータ | 0.982 |
+| テストデータ | 0.979  |
 |--------------+-------|
 
 * レポート課題 3.5
-　dropout 正則化と ReLU と用いた場合、学習データとテストdセータに対する正答率はいくつになったか。
+　dropout 正則化と ReLU と用いた場合、学習データとテストデータに対する正答率はいくつになったか。
 |--------------+-------------------|
-| 学習データ   | 0.972400006055832 |
-| テストデータ |              0.98 |
+| 学習データ   | 0.973800009489059 |
+| テストデータ |             0.986 |
 |--------------+-------------------|
 
 * レポート課題 3.6
 　以上の比較実験から、 dropout 正則化は有効といえるか？また、出力関数はどちらがよいといえるか。
 
-　テストデータの値の差から、有効と言える。また出力関数は ReLU の方が適切であるように考えられる。しかし、この値の差は非常に軽微であるように見え、もう少し難しい問題を用いて性能比較を行わなければ明言することはできないだろう。
+　テストデータの値の差から、有効と言える。テストデータと訓練データで正答率が大きく変化してしまっている時、それは過学習が行われている可能性が高い(実用上ではテストデータと訓練データのデータ性質が乖離してしまった場合や、学習が完了していない場合などにも乖離してしまうことがあるため、訓練データとテストデータの正答率の変化をプロットした上でこの二つの値が離れ始める部分に注目したほうが正しいと考えている。)
+　また出力関数は ReLU の方が適切であるように考えられる。しかし、この値の差は非常に軽微であるように見える。この実験の結果は、OSごと・記法ごと・Rのバージョンごとにやや変化するため、もう少し難しい問題を用いて性能比較を行わなければ明言することはできないだろう。
+
 * レポート課題 3.7
 以上の中で、テストデータに対する正答率が最も良い組み合わせのネットワークに Kaggle の学習データで学習させなさい。Kaggle のテストデータに対する識別結果を下記の手順で作成し、 Kaggle に submit しなさい。正答率と順位はいくつになったか。
 　
-　この問題に対しては特別にRのプログラムを作成し実験を行った。以下にそれを示す。尚、最も良い組み合わせは活性化関数を ``tanh'' にして dropout を ``有効'' にしたものであった。
+
+　この問題に対しては特別にRのプログラムを作成し実験を行った。以下にそれを示す。尚、最も良い組み合わせは活性化関数を ``relu'' にして dropout を ``有効'' にしたものであった。
 #+BEGIN_SRC R
 # R 3.5.1 で実行確認
 # import libraries
@@ -907,9 +907,10 @@ training_mnist_cnn = function(dropout, activate_fn) {
                                                    ctx=devices, num.round = 30, 
                                                    array.batch.size = 100,
                                                    learning.rate=0.05, 
-                                                   momentum=0.9, wd=0.000001,
+                                                   momentum=0.9, wd=0.00001,
                                                    eval.metric=mx.metric.accuracy,
-                                                   batch.end.callback = mx.callback.log.train.metric(100))
+                                                   batch.end.callback =
+                                                     mx.callback.log.train.metric(100))
   print(proc.time() - tic)
 
   # sum(diag(table(test_org[,1], pred.label))) / 1000
@@ -928,8 +929,8 @@ submission <- data.frame(ImageId=1:ncol(test),
 write.csv(submission, file='submission.csv', row.names=FALSE, quote=FALSE)
 
 # 結果
-# 1411 位 elect 12/18/2018
-# 0.98600
+# 1000 位 elect 12/19/2018
+# 0.99157
 #+END_SRC
 　
-　正答率は 0.98600 (98.6%)であった。しかし順位に関しては時間と共に変化するようであるため、正確には示すことが出来なかった。 1411 位というのは結果をアップロードした直後のものである。
+　正答率は 0.99157 (99.157%)であった。しかし順位に関しては時間と共に変化するようであるため、正確には示すことが出来なかった。 1000 位というのは結果をアップロードした直後のものである。
