@@ -15,14 +15,6 @@ test_org <- test
 train.x <- t(train.x/255) # [0, 255] -> [0, 1]
 test <- t(test/255)
 
-
-# preparing train/test data
-train.array <- train.x
-dim(train.array) <- c(28, 28, 1, ncol(train.x))
-
-test.array <- test 
-dim(test.array) <- c(28, 28, 1, ncol(test))
-
 # preparing training
 mx.set.seed(0)
 devices <- mx.cpu()
@@ -89,17 +81,14 @@ training_mnist_cnn = function(dropout, activate_fn) {
   # training model
   model.CNNtanhDrop <- mx.model.FeedForward.create(lenet, X=train.array,
                                                    y=train.y, ctx=devices, num.round = 30, array.batch.size = 100,
-                                                   learning.rate=0.05, momentum=0.9, wd=0.000001,
+                                                   learning.rate=0.05, momentum=0.9, wd=0.00001,
                                                    eval.metric=mx.metric.accuracy,
                                                    batch.end.callback = mx.callback.log.train.metric(100))
   print(proc.time() - tic)
-
-  # sum(diag(table(test_org[,1], pred.label))) / 1000
-  
   model.CNNtanhDrop
 }
 
-model.CNNtanhDrop = training_mnist_cnn(TRUE, "tanh")
+model.CNNtanhDrop = training_mnist_cnn(TRUE, "relu")
 
 preds <- predict(model.CNNtanhDrop, test.array, ctx=devices)
 pred.label <- max.col(t(preds)) -1
@@ -110,5 +99,5 @@ submission <- data.frame(ImageId=1:ncol(test),
 write.csv(submission, file='submission.csv', row.names=FALSE, quote=FALSE)
 
 # 結果
-# 1411 位 elect 12/18/2018
-# 0.98600
+# 1411 位 elect 12/19/2018
+# 0.99157
