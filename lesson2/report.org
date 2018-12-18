@@ -1,4 +1,3 @@
-
 #+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:t arch:headline ^:nil
 #+OPTIONS: author:t broken-links:nil c:nil creator:nil
 #+OPTIONS: d:(not "LOGBOOK") date:nil e:nil email:t f:t inline:t num:t
@@ -74,15 +73,15 @@ hist(res_s[z * 10][[1]]$wts, breaks=seq(-0.1, 0.1, 0.04), freq=TRUE)
 ** 隠れ素子を一つずつ増やし、10回の学習で10回とも正しく識別できるようになった隠れ素子の数を求めなさい。　
 37個
 ** 隠れ素子の数によって誤認識率の平均がどのように変化するのかをグラフで示しなさい。
-#+CAPTION: 1-1-2.png
+#+CAPTION: 1-1-2.png 隠れ素子の数と誤認識率の平均のグラフ
 #+ATTR_LATEX: :width 8cm
 [[./1-1-2.png]]
-** 隠れ素子が1個の場合に得られた学習結果について、結合係数の大きさの分布を示しなさい。
-#+CAPTION: 1-1-3.png
+** 隠れ素子が1個の場合に得られた一つの学習結果について、結合係数の大きさの分布を示しなさい。
+#+CAPTION: 1-1-3.png 隠れ素子が1個の場合の結合係数の大きさの分布
 #+ATTR_LATEX: :width 8cm
 [[./1-1-3.png]]
-** 10回とも正しく識別できた場合の学習結果について、結合係数の大きさの分布を示し、隠れ素子が1個の場合と比較検討しなさい。
-#+CAPTION: 1-1-4.png
+** 10回とも正しく識別できた場合の一つの学習結果について、結合係数の大きさの分布を示し、隠れ素子が1個の場合と比較検討しなさい。
+#+CAPTION: 1-1-4.png 10回とも正しく識別出来た場合の結合係数の大きさの分布
 #+ATTR_LATEX: :width 8cm
 [[./1-1-4.png]]
 
@@ -114,7 +113,8 @@ samp <- c(sample(1:50, 25), sample(51:100, 25), sample(101:150, 25))
 # 再代入誤りが一番小さな場合の結合係数の分布と、
 # 汎化誤差が一番小さな場合の結合係数の分布を、
 # decay=0 の場合と比較しなさい。
-hidden = c(1:10)
+hidden = 
+c(1:10)
 iter = c(1:10)
 decay = 0
 trave_learn = rep(0, length(hidden))
@@ -192,53 +192,54 @@ hist(res_s[which.min(trave_test)][[1]]$wts, breaks=seq(-6, 6, 1), freq=TRUE)
 
 - 再代入誤りの変化のグラフ
 
-    #+CAPTION: 1-2-1-1.png
+    #+CAPTION: 1-2-1-1.png 再代入誤りの変化のグラフ
     #+ATTR_LATEX: :width 8cm
     [[./1-2-1-1.png]]
 #+LATEX: \newpage
 - 汎化誤差の変化のグラフ
 
-    #+CAPTION: 1-2-1-2.png
+    #+CAPTION: 1-2-1-2.png 汎化誤差の変化のグラフ
     #+ATTR_LATEX: :width 8cm
     [[./1-2-1-2.png]]
 #+LATEX: \newpage
 ** 再代入誤りが一番小さな場合の結合係数の分布と、汎化誤差が一番小さな場合の結合係数の分布を比較検討しなさい。
 - 再代入誤りが一番小さな場合の結合係数の分布
 
-#+CAPTION: 1-2-2-1.png
-#+ATTR_LATEX: :width 8cm
-[[./1-2-2-1.png]]
+  #+CAPTION: 1-2-2-1.png 再代入誤りが一番小さな場合の結合係数の分布
+  #+ATTR_LATEX: :width 8cm
+  [[./1-2-2-1.png]]
 - 汎化誤差が一番小さな場合の結合係数の分布
 
-#+CAPTION: 1-2-2-2.png
-#+ATTR_LATEX: :width 8cm
-[[./1-2-2-2.png]]
+  #+CAPTION: 1-2-2-2.png 汎化誤差が一番小さな場合の結合係数の分布
+  #+ATTR_LATEX: :width 8cm
+  [[./1-2-2-2.png]]
 
 - 比較
-　ほとんどの試行でこの２つが異なることはなかった。また今回のように異なった場合の結合係数の分布も似通った形状をしていることがわかる。これは再代入誤りと汎化誤差、いずれもデータの性質は異なっていないため、極端に結合係数の分布が異なることはないと想像できる。
+  　ほとんどの試行でこの２つが異なることはなかった。また今回のように異なった場合の結合係数の分布も似通った形状をしていることがわかる。これは再代入誤りと汎化誤差、いずれもデータの性質は異なっていないため、極端に結合係数の分布が異なることはないと想像できる。
+
 #+LATEX: \newpage
 ** decay=0.01 にして同様の実験を行い、隠れ素子数に対する再代入誤りと汎化誤差の変化をグラフ化しなさい。
 
 - 再代入誤りの変化のグラフ
-#+CAPTION: 1-2-3-1.png
-#+ATTR_LATEX: :width 8cm
-[[./1-2-3-1.png]]
+  #+CAPTION: 1-2-3-1.png 再代入誤りの変化のグラフ(decay=0.01)
+  #+ATTR_LATEX: :width 8cm
+  [[./1-2-3-1.png]]
 - 汎化誤差の変化のグラフ
-#+CAPTION: 1-2-3-2.png
-#+ATTR_LATEX: :width 8cm
-[[./1-2-3-2.png]]
+  #+CAPTION: 1-2-3-2.png 汎化誤差の変化のグラフ(decay=0.1)
+  #+ATTR_LATEX: :width 8cm
+  [[./1-2-3-2.png]]
 #+LATEX: \newpage
 ** 再代入誤りが一番小さな場合の結合係数の分布と、汎化誤差が一番小さな場合の結合係数の分布を、decay=0 の場合と比較しなさい。
 - 再代入誤りが一番小さな場合の結合係数の分布
-#+CAPTION: 1-2-4-1.png
-#+ATTR_LATEX: :width 8cm
+  #+CAPTION: 1-2-4-1.png
+  #+ATTR_LATEX: :width 8cm
 [[./1-2-4-1.png]]
 - 汎化誤差が一番小さな場合の結合係数の分布
 #+CAPTION: 1-2-4-2.png
 #+ATTR_LATEX: :width 8cm
 [[./1-2-4-2.png]]
 - 比較
-どちらも同じ場合の分布なので差は生じない。
+  　いずれと比較しても、decay = 0.01 の方が分布の幅が縮まっていることが確認できる。また概形としても decay = 0.01 の方がより綺麗な(対称な)山の形を描いていることがわかる。
 #+LATEX: \newpage
 * レポート課題 2.1
   　例題に従って全結合型3層パーセプトロンによる手書き数字認識システムを実装し、下記の問いに答えなさい。
@@ -451,7 +452,8 @@ training_mnist(seeds[3][[1]], "sigmoid")
 | テストデータ |             0.827 |              0.84 |             0.837 |
 |--------------+-------------------+-------------------+-------------------|
 
-　sigmoid 関数を用いると　ReLUよりもやや精度が低くなったように感じる。しかし、学習データとテストデータの認識率の差を見ると、後者の方が小さいため、より適切なネットワーク構成を考えることができれば、ReLU以上の精度を汎化性能を得られる可能性があるのかもしれない。
+　sigmoid 関数を用いると　ReLUよりもやや精度が低くなったように感じる。しかし、学習データとテストデータの認識率の差を見ると、後者の方が小さいため、より適切なネットワーク構成を考えることができれば、ReLU 以上の精度な汎化性能を得られる可能性があるのかもしれない。
+
 #+LATEX: \newpage
 * レポート課題 3.1
 　以下にレポート課題 3.1 から 3.6 までを実行したRのファイルを示し、その後それぞれの問いについて答える。
@@ -534,14 +536,14 @@ sum(diag(table(test_org[,1], pred.label))) / 1000
 # 1)
 # 1-1)
 # M1 : 24
-# N1 : 5000
+# N1 : 20
 # M2 : 12
-# N2 : 5000
+# N2 : 20
 # 1-2)
 # M3 : 8
-# N3 : 5000
+# N3 : 50
 # M4 : 4
-# N4 : 5000
+# N4 : 50
 # 1-3)
 # 3次元配列2次元配列に変換している
 # 2)
@@ -764,16 +766,17 @@ training_mnist_cnn(TRUE, "relu")
 #+end_src
 ** 第1隠れ層の conv1 の出力素子数は $M_1 \times M_1 \times N_1$ である。また、pool1 の出力素子数は $M_2 \times M_2 \times N_2$ である。 $M_1, N_1$ と $M_2, N_2$ はいくつか。
 - $M_1$ 24
-- $N_1$ 5000
+- $N_1$ 20
 - $M_2$ 12
-- $N_2$ 5000
+- $N_2$ 20
 ** 第2隠れ層の conv2 の出力素子数は $M_3 \times M_3 \times N_3$ である。また、 pool2 の出力素子数は $M_4 \times M_4 \times N_4$ である。$M_3, N_3$ と $M_4, N_4$ はいくつか。
 - $M_1$ 8
-- $N_1$ 5000
+- $N_1$ 50
 - $M_2$ 4
-- $N_2$ 5000
+- $N_2$ 50
 ** 第1結合層への入力を作っている mx.symbol.Flatten() 関数の役割は何か。
-　３次元配列を、第１次元と第２次元をまとめることで、２次元配列に変換している。
+　(バッチを考慮するならば)３次元配列を、バッチを表す次元を除いた２つの次元をまとめることで、２次元配列に変換している。
+　一般に深層学習を行う際にはバッチという学習データをいくつかの袋に入れた単位で学習が行われるため、例えば Tensorflow などで実装を行う際にはこの ``一次元増える'' 現象について理解しておく必要がある。
 * レポート課題 3.2
 　学習データとテストデータに対する正答率はいくつになったか。
 |--------------+-------------------|
@@ -809,4 +812,124 @@ training_mnist_cnn(TRUE, "relu")
 * レポート課題 3.7
 以上の中で、テストデータに対する正答率が最も良い組み合わせのネットワークに Kaggle の学習データで学習させなさい。Kaggle のテストデータに対する識別結果を下記の手順で作成し、 Kaggle に submit しなさい。正答率と順位はいくつになったか。
 　
+　この問題に対しては特別にRのプログラムを作成し実験を行った。以下にそれを示す。尚、最も良い組み合わせは活性化関数を ``tanh'' にして dropout を ``有効'' にしたものであった。
+#+BEGIN_SRC R
+# R 3.5.1 で実行確認
+# import libraries
+library(nnet)
+library(MASS)
+library(mxnet)
+
+train <- read.csv("data/train.csv", header = TRUE)
+test <- read.csv("data/test.csv", header = TRUE)
+train <- data.matrix(train) 
+test <- data.matrix(test)
+train.x <- train[,-1]
+train.y <- train[,1]
+test_org <- test
+# test <- test[,-1]
+train.x <- t(train.x/255) # [0, 255] -> [0, 1]
+test <- t(test/255)
+
+
+# preparing train/test data
+train.array <- train.x
+dim(train.array) <- c(28, 28, 1, ncol(train.x))
+
+test.array <- test 
+dim(test.array) <- c(28, 28, 1, ncol(test))
+
+# preparing training
+mx.set.seed(0)
+devices <- mx.cpu()
+tic <- proc.time()
+
+
+training_mnist_cnn = function(dropout, activate_fn) {
+  # input layer
+  data <- mx.symbol.Variable("data")
+  
+  # hidden layer 1 
+  conv1 <- mx.symbol.Convolution(data=data, kernel=c(5, 5), num_filter=20)
+  tanh1 <- mx.symbol.Activation(data=conv1, act_type=activate_fn)
+  pool1 <- mx.symbol.Pooling(data=tanh1, pool_type="max", kernel=c(2, 2),
+                             stride=c(2, 2))
+  
+  if (dropout) {
+    drop1 <- mx.symbol.Dropout(data=pool1, p=0.5)
+  } else {
+    drop1 <- pool1
+  }
+  
+  # hidden layer 2
+  conv2 <- mx.symbol.Convolution(data=drop1, kernel=c(5,5), num_filter=50)
+  tanh2 <- mx.symbol.Activation(data=conv2, act_type=activate_fn)
+  pool2 <- mx.symbol.Pooling(data=tanh2, pool_type="max", kernel=c(2, 2),
+                             stride=c(2, 2))
+  
+  if (dropout) {
+    drop2 <- mx.symbol.Dropout(data=pool2, p=0.5)
+  } else {
+    drop2 <- pool2
+  }
+  
+  # fully connected layer 1
+  flatten <- mx.symbol.Flatten(data=drop2)
+  fc1 <- mx.symbol.FullyConnected(data=flatten, num_hidden=500)
+  tanh3 <- mx.symbol.Activation(data=fc1, act_type=activate_fn)
+  
+  if (dropout) {
+    drop3 <- mx.symbol.Dropout(data=tanh3, p=0.5)
+  } else {
+    drop3 <- tanh3
+  }
+  
+  # fully connected layer 2
+  fc2 <- mx.symbol.FullyConnected(data=drop3, num_hidden=10)
+  
+  # output layer
+  lenet <- mx.symbol.SoftmaxOutput(data=fc2)
+  
+  # preparing train/test data
+  train.array <- train.x
+  dim(train.array) <- c(28, 28, 1, ncol(train.x))
+  
+  test.array <- test 
+  dim(test.array) <- c(28, 28, 1, ncol(test))
+  
+  # preparing training
+  mx.set.seed(0)
+  devices <- mx.cpu()
+  tic <- proc.time()
+  
+  # training model
+  model.CNNtanhDrop <- mx.model.FeedForward.create(lenet, X=train.array, y=train.y,
+                                                   ctx=devices, num.round = 30, 
+                                                   array.batch.size = 100,
+                                                   learning.rate=0.05, 
+                                                   momentum=0.9, wd=0.000001,
+                                                   eval.metric=mx.metric.accuracy,
+                                                   batch.end.callback = mx.callback.log.train.metric(100))
+  print(proc.time() - tic)
+
+  # sum(diag(table(test_org[,1], pred.label))) / 1000
+  
+  model.CNNtanhDrop
+}
+
+model.CNNtanhDrop = training_mnist_cnn(TRUE, "tanh")
+
+preds <- predict(model.CNNtanhDrop, test.array, ctx=devices)
+pred.label <- max.col(t(preds)) -1
+
+submission <- data.frame(ImageId=1:ncol(test),
+                         Label=pred.label)
+
+write.csv(submission, file='submission.csv', row.names=FALSE, quote=FALSE)
+
+# 結果
+# 1411 位 elect 12/18/2018
+# 0.98600
+#+END_SRC
 　
+　正答率は 0.98600 (98.6%)であった。しかし順位に関しては時間と共に変化するようであるため、正確には示すことが出来なかった。 1411 位というのは結果をアップロードした直後のものである。
